@@ -29,9 +29,8 @@ async function run() {
         const productCollection = client.db('warehouseManagement').collection('product');
         const myItemsCollection = client.db('warehouseManagement').collection('myItems');
 
-    //    get products 
+        //    get all product products api 
         app.get('/product', async (req, res) => {
-            console.log('query', req.query);
             const page = parseInt(req.query.page)
             const size = parseInt(req.query.size)
             const query = {};
@@ -47,8 +46,16 @@ async function run() {
             res.send(products)
 
         })
+        //    get all my  product products api 
+        app.get('/myProduct', async (req, res) => {
+            const query = {};
+            const cursor = myItemsCollection.find(query);
+            const products = await cursor.toArray();
+            res.send(products)
 
-    //   count total product and send it 
+        })
+
+        //   count total product and send it 
         app.get('/productCount', async (req, res) => {
             const count = await productCollection.estimatedDocumentCount();
             res.send({ count });
@@ -66,7 +73,7 @@ async function run() {
             const result = await productCollection.updateOne(filter, updateDoc, option);
             res.send(result);
         });
-
+        //   update api 
         app.put('/myItems/:id', async (req, res) => {
             const updateProduct = req.body;
             const id = req.params.id;
@@ -78,7 +85,12 @@ async function run() {
             const result = await myItemsCollection.updateOne(filter, updateDoc, option);
             res.send(result);
         });
-
+        // add a product
+        app.post('/addProduct', async (req, res) => {
+            const doc = req.body;
+            const result = await myItemsCollection.insertOne(doc);
+            res.send(result);
+        });
 
 
 
