@@ -53,7 +53,17 @@ async function run() {
             const products = await cursor.toArray();
             res.send(products)
 
-        })
+        });
+
+        // get my added product as my product's view
+        app.get('/order', async (req, res) => {
+            const email = req.query.email;
+            const query = { email };
+            const cursor = myItemsCollection.find(query);
+            const orders = await cursor.toArray();
+
+            res.send(orders);
+        });
 
         //   this api for count total product
         app.get('/productCount', async (req, res) => {
@@ -100,7 +110,7 @@ async function run() {
             res.send(result);
         });
 
-      // find single user
+      // find single product
       app.get('/product/:id',async(req,res)=>{
         const id = req.params.id;
         const query = {_id:ObjectId(id)};
