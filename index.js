@@ -32,13 +32,13 @@ async function run() {
         //    get all product products api 
         app.get('/product', async (req, res) => {
             const page = parseInt(req.query.page)
-            const size = parseInt(req.query.size)
+            const PageSize = parseInt(req.query.size)
             const query = {};
             const cursor = productCollection.find(query);
             let products;
-            if (page || size) {
+            if (page || PageSize) {
 
-                products = await cursor.skip(page * size).limit(size).toArray();
+                products = await cursor.skip(page * PageSize).limit(PageSize).toArray();
             } else {
 
                 products = await cursor.toArray();
@@ -55,7 +55,7 @@ async function run() {
 
         })
 
-        //   count total product and send it 
+        //   this api for count total product
         app.get('/productCount', async (req, res) => {
             const count = await productCollection.estimatedDocumentCount();
             res.send({ count });
@@ -99,6 +99,16 @@ async function run() {
             const result = await myItemsCollection.deleteOne(query);
             res.send(result);
         });
+
+      // find single user
+      app.get('/product/:id',async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id:ObjectId(id)};
+        const result = await productCollection.findOne(query);
+        res.send(result);
+    })
+
+       
 
 
 
