@@ -29,7 +29,7 @@ async function run() {
         const productCollection = client.db('warehouseManagement').collection('product');
         const myItemsCollection = client.db('warehouseManagement').collection('myItems');
 
-        //    get all product products api 
+        //    get all  products api 
         app.get('/product', async (req, res) => {
             const page = parseInt(req.query.page)
             const PageSize = parseInt(req.query.size)
