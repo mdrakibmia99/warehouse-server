@@ -3,4 +3,4 @@
 * server link: [click here](https://desolate-ridge-35981.herokuapp.com/)
 * client side  repo: [click here](https://github.com/ProgrammingHeroWC4/warehouse-management-client-side-rkrakibhasan680)
 * server side  repo: [click here](https://github.com/mdrakibmia99/manufacturer-website-server-side)
-* stackOverflow question:[Click here](https://stackoverflow.com/questions/72128599/warning-cannot-update-a-component-browserrouter-while-rendering-a-different)
+
